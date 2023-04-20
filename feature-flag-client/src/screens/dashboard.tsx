@@ -1,11 +1,14 @@
 import React from 'react';
 import { MedicationDetails } from '../components/medication-details';
 import { PageLayout } from '../components/page-layout';
+import { useFeature } from '../effects/feature/useFeature'
+import { profileSectionFlagKey } from '../feature-flag-config'
 import { useMedication, useUser } from '../mock-data';
 
 export const DashboardScreen = () => {
   const user = useUser();
   const medication = useMedication();
+  const userType = useFeature<string>(profileSectionFlagKey, '')
 
   return (
     <PageLayout className="dashboard">
@@ -25,7 +28,7 @@ export const DashboardScreen = () => {
           <li>Repeats left: {medication.repeatsLeft}</li>
           <li>Instructions: {medication.instructions}</li>
         </ul>
-        <MedicationDetails />
+        {userType === 'variation' && <MedicationDetails/>}
       </div>
     </PageLayout>
   );

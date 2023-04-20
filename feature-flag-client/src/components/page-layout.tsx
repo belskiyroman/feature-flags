@@ -1,10 +1,12 @@
 import React from 'react';
+import { useFeature } from '../effects/feature/useFeature'
+import { launchBannerFlagKey } from '../feature-flag-config'
 
-// Problem: 
+// Problem:
 //     This should be conditionally rendered based on feature flag enrolment.
-// Feature flag name: 
+// Feature flag name:
 //     general-render-launch-banner
-// Setup: 
+// Setup:
 //     Show to users with flag value: true
 const PromotionalBanner = () => (
   <div className="promotional-banner">
@@ -13,9 +15,10 @@ const PromotionalBanner = () => (
 )
 
 export const PageLayout = ({ children, className }: { children: React.ReactNode, className: string }) => {
+  const isPromotional = useFeature<boolean>(launchBannerFlagKey, false)
   return (
     <div className={`page-layout ${className}`}>
-      <PromotionalBanner />
+      {isPromotional && <PromotionalBanner/>}
       {children}
     </div>
   )

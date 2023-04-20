@@ -2,13 +2,13 @@ import React from 'react';
 import { useMedication } from '../mock-data';
 import { RequestReviewButton } from './request-review-button';
 
-// Problem: 
+// Problem:
 //     This should be conditionally rendered based on feature flag enrolment.
-// Feature flag name: 
+// Feature flag name:
 //     profile-render-details-section
-// Setup: 
+// Setup:
 //     Show to users with flag value 'variation'
-export const MedicationDetails = () => { 
+export const MedicationDetails = () => {
   const medication = useMedication();
 
   return (
