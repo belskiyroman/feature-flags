@@ -13,6 +13,17 @@ export const useFeature = <T extends FeatureFlag>(name: string, defaultValue: T)
 
   useEffect(() => {
     feature.onChange(() => {
+
+      // just for fun!
+      console.warn('!!! 1000 flags !!! - get 100+ feature flags in a loop on each change for each flag. This still working well!')
+      const benchmark = '1000 times to get flag took'
+      console.time(benchmark)
+      for(let i = 0; i < 1000; i++) {
+        feature.flag(name, defaultValue)
+      }
+      console.timeEnd(benchmark)
+      
+
       setFlag(feature.flag(name, defaultValue))
     })
   }, [setFlag, defaultValue, name])
